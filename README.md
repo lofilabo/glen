@@ -1,4 +1,4 @@
-balsa
+application for glen
 =====
 
-BalsaAndTissue framework.
+Please see the file instructions.txt for deployment and configuration notes
