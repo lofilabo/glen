@@ -1,0 +1,109 @@
+
+
+OVERVIEW AND DEPLOYMENT INSTRUCTIONS
+
+Contained in this archive /repository are all of the files needed to run the
+M3 Test application as described as follows:
+
+"Create a ‘TO DO’ web application that will provide the following functionality"
+
+The application uses the BALSA framework, which is a tiny (toy) PHP web
+application framework for demonstration purposes.  The framework is structured
+as follows:
+
+index.php (entry point)
+
+Y_CONFIG - all configuration files
+  config.php - the file in which the database configuration is set.
+Y_GLOBALS - system files used throughout the application
+  loginchecker.php - the file which contains the (very crude!) login /
+  validation routine.
+Y_IO - utilities for file IO
+
+Z_CONTROL - Controllers
+Z_VIEW - Template HTML files
+Z_ZLOGIC - Database access files
+
+Z-UNIVERSAL
+  app_view.em - the main HTML file for the whole application.
+  (the user may edit this to provide a look and feel for the whole
+  application)
+
+SOME LIMITATIONS.
+The application has been constructed with an all-my-own-work implementation of
+the MVC design pattern and not a proven framework.  It naturally has some
+very basic features which would not not be acceptable in a commercial
+application:
+- No database abstraction
+    Database queries are accomplished using passthrough SQL queries
+    with the attendant security risks
+- No routing engine
+    'REST'-type routes are not available.  URI's are formed of The
+    standard URL?key1=value1&key2=value2... vartypes
+- No template engine
+    PHP tags are available within the .em template file, as are [-- --]
+    tokens which provide for very limited PHP functionality.
+
+The implementation as-id serves to demonstrate the value of the MVC concept:
+separate files are used for:
+  database interrogation
+  programmatic Logic
+  display
+
+Where useful, OO principles are used.  For instance, each 'controller' class
+only ever calls the same method in order to render.  Where possible, the CoC.
+(Convention Over Configuration) model is used: to invoke a part of the operation
+called 'sayhello', the uri
+  [domain]?op=sayhello
+is used.  It is then expected that the application will find a sayhello.PHP
+file in the Z_CONTROL directory (for programmatic logic), a sayhello.php
+file in the Z_LOGIC directory (for database access) and a sayhell.em file
+in the Z_VIEW directory.
+
+DEPLOYMENT.
+
+Unpack the archive to a directory on your machine; in the root of this
+directory, run the built-in PHP Web Server:
+
+  php -S 127.0.0.1:8081
+
+Point your browser at this URL.  You should see some test data appear in
+the browser and some debug output in your terminal window.
+
+Next, execute the SQL file in the root of the application to build the
+MySQL database.  Edit the file Y_CONFIG to reflect the settings of your
+database server.  Test this with the URL:
+
+  127.0.0.1:8081/index.php?op=test
+
+You will be challenged for a username/password (as agreed).
+After enetering the usraname and password, you should now see this
+test data (pulled from the database):
+array(3) {
+[0]=>
+array(2) {
+["id"]=>
+string(1) "1"
+["data"]=>
+string(3) "One"
+}
+[1]=>
+array(2) {
+["id"]=>
+string(1) "2"
+["data"]=>
+string(3) "Two"
+}
+[2]=>
+array(2) {
+["id"]=>
+string(1) "3"
+["data"]=>
+string(5) "Three"
+}
+}
+
+These are the evidence that the database is set up correctly and the
+connection is being made. (NOTE: Passwords are NOT stored in any encrypted
+way within the database.  In aproduction system, this would of course NOT
+be the case!)
