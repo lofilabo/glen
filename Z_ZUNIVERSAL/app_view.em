@@ -8,6 +8,18 @@
 	</head>
 
 	<body>
+
+		<h1>TO-DO LIST</h1>
+
+		<a href='index.php?op=list'>List all To-Do Items</a>
+		&nbsp;|&nbsp;
+		Add Items
+		&nbsp;|&nbsp;
+		<a href='index.php?op=999999'>Logout</a>
+
+
+		<hr>
+
 		[!!--RENDER--!!]
 	</body>
 </html>

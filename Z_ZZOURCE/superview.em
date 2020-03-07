@@ -12,8 +12,8 @@
 		-->
 
 	</head>
-	
+
 	<body bgcolor="ff0000">
-		[!!--RENDER--!!]	
+		[!!--RENDER--!!]
 	</body>
 </html>

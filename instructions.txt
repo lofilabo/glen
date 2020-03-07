@@ -107,3 +107,23 @@ These are the evidence that the database is set up correctly and the
 connection is being made. (NOTE: Passwords are NOT stored in any encrypted
 way within the database.  In aproduction system, this would of course NOT
 be the case!)
+
+THE application
+The basic entry point for the application is:
+
+127.0.0.1:8081/index.php?op=list
+
+This will show a list of all the TDD (To-Do Documents) currently stored.
+The columns:
+  items
+  date added
+  date date
+  priority
+
+are available for sorting in ascending (UP) and descending(DOWN) order.
+
+The basic logic of this is contained in the file Z_CONTROL/list.php
+
+The function used for database access is in the file Z_LOGIC/list.php
+
+The HTML to render the list is in the file Z_VIEW/list.em
