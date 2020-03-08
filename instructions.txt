@@ -167,3 +167,30 @@ LOGIN HISTORY
 User Login History is stored in a flat (tab-delimited) file to demonstrate
 a method of data storage when an RDBMS is not strictly necessary and the
 data is easily human-readable.
+
+BULK Delete
+
+Functionality for this operation is also found in the Z_CONTROL/del.php
+class file.  It is invoked if the URI key ids (and not id) contains a
+comma-separated string of numeric chars.
+
+KNOWN ISSUES AND IMPROVEMENTS:
+
+A good deal of thought has been put into the OO design of the applications
+(can you spot the Abstract Factory implementation and the use of pass-through
+inheritance?  If not....good!) but certain commonalities to similar files
+could easily be further abstracted out (for instance, each data class contains
+its own executeSQL method, which there is probably a way of abstracting, except
+that each of these methods are subtly different.)
+
+Because the purpose of this project is to demonstrate a concept, and NOT
+particularly concerned with security, there are large vulnerabilities
+to SQL injection, and the login operation can be fairly easily defeated
+by brute force.  In production, a 3rd party login/validation system would almost
+certainly be used (either an oAuth library or a framework-included security
+model).  This is almost a justification for the use of a PHP framework with no
+other considerations.
+
+jQuery is not used.  This choice was made because in this example, it is not 
+necessary.  This imposes some limitations on user interface capability -
+it might, for instance, make for a more rewarding UX if a

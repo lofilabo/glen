@@ -35,10 +35,18 @@
 				$rv = $logic->delQuery($_GET["id"]);
 				if($rv==1){
 					header('Location: index.php?op=list');
-					$this->z = "Database Operation Succeeded";
-				}else{
-					$this->z = "Database Operation failed.";
 				}
+			}
+
+			if(isset($_GET["ids"])){
+
+					$arrIDs = explode(",", $_GET["ids"]);
+					foreach( $arrIDs as $oneID ){
+						if($oneID != ""){
+							$rv = $logic->delQuery($oneID);
+						}
+					}
+					header('Location: index.php?op=list');
 			}
 			$this->control();
 		}
