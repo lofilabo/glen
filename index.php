@@ -5,8 +5,8 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 
-session_start(); 
-header("Cache-control: private"); 
+session_start();
+header("Cache-control: private");
 include("common_includes/includes.php");
 
 //loginchecker();
@@ -21,6 +21,8 @@ include("common_includes/includes.php");
 
 		if($op==="logout"){
 			$_SESSION['pri'] = 0;
+			var_dump("logged out");
+			header('Location: index.php?op=list');
 		}
 
 		if($op==="checklogin"){
@@ -35,19 +37,19 @@ include("common_includes/includes.php");
 			}
 		}
 	}else{
-		
+
 		if(isset($_POST['op'] ) ){
 			$op = ($_POST["op"]);
 
 			if($op==="logout"){
-				
+
 				$_SESSION['pri'] = 0;
 			}
 
 			if($op==="checklogin"){
 				loginchecker();
 			}else{
-				
+
 				if (class_exists($op . "_c")){
 					$constr = "new " . $op . "_c();";
 					eval($constr);
@@ -56,14 +58,14 @@ include("common_includes/includes.php");
 					$pg=new basic_c;
 				}
 			}
-		
+
 		}else{
 
 
 			//if a 'default' page is required, enter it here with a statement similar to:
 			//
 			$pg=new basic_c;
-		
+
 		}
 
 
@@ -79,7 +81,7 @@ die;
 
 
 
-		 
+
 		$object = new MyObject();
 		var_error_log( $object );
 
@@ -96,7 +98,7 @@ die;
 			/*
 			Now, $routes will contain all the routes. $routes[0] will correspond to first route. For e.g. in above example $routes[0] is search, $routes[1] is book and $routes[2] is fitzgerald
 			*/
-		 
+
 
 				if($routes[1] == 'itemone'){
 					var_dump("ITEM ONE");

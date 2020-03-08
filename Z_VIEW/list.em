@@ -1,22 +1,10 @@
-<style>
-table, th, td {
-  border: 1px solid black;
-	border-collapse: collapse;
-}
 
-th, td {
-  padding: 15px;
-}
-
-</style>
 
 <script>
 function deleteTDD( id ) {
     var ask = window.confirm("Confirm Delete of this item");
     if (ask) {
-        window.alert(id);
-
-        window.location.href = "window-location.html";
+        window.location.href = "index.php?op=del&id=" + id;
     }
 }
 

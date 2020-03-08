@@ -50,6 +50,9 @@ separate files are used for:
   programmatic Logic
   display
 
+As its (very severe!) limitations become apparent, it will also serve as
+a point of advocacy for the use of a Better / More-Mature framework.
+
 Where useful, OO principles are used.  For instance, each 'controller' class
 only ever calls the same method in order to render.  Where possible, the CoC.
 (Convention Over Configuration) model is used: to invoke a part of the operation
@@ -66,6 +69,13 @@ Unpack the archive to a directory on your machine; in the root of this
 directory, run the built-in PHP Web Server:
 
   php -S 127.0.0.1:8081
+
+  (the application may, of course, be run under your favourite http
+  server; the configuration should be trivial.  The PHP Testing server
+  is used here so as to minimise dependencies, and to allow a means of
+  demonstrating the Console Debugger, which is extremely useful when
+  developing AJAX applications which do not produce sensible HTTP output
+  on failure.)
 
 Point your browser at this URL.  You should see some test data appear in
 the browser and some debug output in your terminal window.
@@ -87,28 +97,32 @@ string(1) "1"
 ["data"]=>
 string(3) "One"
 }
-[1]=>
-array(2) {
-["id"]=>
-string(1) "2"
-["data"]=>
-string(3) "Two"
-}
-[2]=>
-array(2) {
-["id"]=>
-string(1) "3"
-["data"]=>
-string(5) "Three"
-}
-}
+(...)
 
 These are the evidence that the database is set up correctly and the
 connection is being made. (NOTE: Passwords are NOT stored in any encrypted
-way within the database.  In aproduction system, this would of course NOT
+way within the database.  In a production system, this would of course NOT
 be the case!)
 
-THE application
+Note that, once the debug-demonstration and connection-demonstration routines
+have been run, it is possible to delete them from the application.  It is
+neither harmful nor helpful to do so for the purposes of this demonstration.
+
+If you wish, you may force the entry point to the application to be the 'list'
+operation by modifying index.php such that
+
+LINE 65
+$pg=new basic_c;
+
+is changed to
+
+$pg=new list_c; //this will change the class that the application loads
+                //by default.
+
+(it also possible to immediately show the 'new item', form by setting
+$pg = new add_c)
+
+The Application
 The basic entry point for the application is:
 
 127.0.0.1:8081/index.php?op=list
@@ -127,3 +141,29 @@ The basic logic of this is contained in the file Z_CONTROL/list.php
 The function used for database access is in the file Z_LOGIC/list.php
 
 The HTML to render the list is in the file Z_VIEW/list.em
+
+
+DELETE A ROW ITEM.
+
+Click the link on the far RHS of any given item to delete it.  This will take
+the following action:
+
+1. Use very basic JavaScript to pop up a Confirm box.  If the conditions of
+the Confirm are agreed to, the URL path:
+
+127.0.0.1/index.php?op=delete&id=3
+
+will be called where in this case, id=3 refers to the record ID which will be
+deleted.
+
+
+INSERT A NEW ROW ITEM.
+
+Click on the link in the application menu.
+This will run add_c inside the class file Z_CONTROL/add.php
+
+LOGIN HISTORY
+
+User Login History is stored in a flat (tab-delimited) file to demonstrate
+a method of data storage when an RDBMS is not strictly necessary and the
+data is easily human-readable.

@@ -8,15 +8,27 @@
 	</head>
 
 	<body>
+		<style>
+		table, th, td {
+		  border: 1px solid black;
+			border-collapse: collapse;
+		}
+
+		th, td {
+		  padding: 15px;
+		}
+
+		</style>
 
 		<h1>TO-DO LIST</h1>
 
 		<a href='index.php?op=list'>List all To-Do Items</a>
 		&nbsp;|&nbsp;
-		Add Items
+		<a href='index.php?op=add'>Add Item</a>
 		&nbsp;|&nbsp;
-		<a href='index.php?op=999999'>Logout</a>
-
+		<a href='userlog.txt'>Login Log</a>
+		&nbsp;|&nbsp;
+		<a href='index.php?op=logout'>Logout</a>
 
 		<hr>
 
